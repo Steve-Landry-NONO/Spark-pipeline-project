@@ -43,8 +43,10 @@ def nettoyer_films(films_bruts: DataFrame) -> DataFrame:
     Elle est transformée en tableau afin de pouvoir utiliser explode() dans les
     analyses par genre.
 
-    Une colonne annee_sortie est également extraite depuis le titre du film
-    lorsque l'information est présente entre parenthèses.
+    L'année de sortie est extraite depuis le titre lorsque l'information est
+    présente. Certains titres ne contiennent pas d'année exploitable ; dans ce
+    cas, la valeur est conservée à NULL plutôt que de provoquer une erreur de
+    cast.
     """
     films_propres = (
         films_bruts
@@ -55,9 +57,17 @@ def nettoyer_films(films_bruts: DataFrame) -> DataFrame:
             F.split(F.col("genres"), "\\|")
         )
         .withColumn(
-            "annee_sortie",
-            F.regexp_extract(F.col("title"), r"\((\d{4})\)", 1).cast("int")
+            "annee_sortie_texte",
+            F.regexp_extract(F.col("title"), r"\((\d{4})\)", 1)
         )
+        .withColumn(
+            "annee_sortie",
+            F.when(
+                F.col("annee_sortie_texte") != "",
+                F.col("annee_sortie_texte").cast("int")
+            ).otherwise(None)
+        )
+        .drop("annee_sortie_texte")
     )
 
     return films_propres
