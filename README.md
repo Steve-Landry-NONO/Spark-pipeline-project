@@ -1,6 +1,6 @@
 # Projet Spark — Pipeline data MovieLens
 
-> Projet individuel Apache Spark réalisé en PySpark : ingestion, nettoyage, stockage Parquet, analyses métier, optimisation, lecture de la Spark UI et exploration complémentaire.
+> Projet Apache Spark réalisé en PySpark : ingestion, nettoyage, stockage Parquet, analyses métier, optimisation, lecture de la Spark UI et exploration complémentaire.
 
 ---
 
@@ -8,8 +8,8 @@
 
 | Élément | Détail |
 |---|---|
-| Étudiant | Steve Landry KOUOKAM NONO |
-| Réalisation | Projet individuel |
+| Réalisation | Steve Landry KOUOKAM NONO |
+| Coordination| Antoine LUCSKO |
 | Jeu de données | MovieLens small |
 | Technologie | PySpark |
 | Mode d'exécution | Local |
@@ -17,13 +17,14 @@
 | Architecture | Bronze → Silver → Gold |
 | Rapport Markdown | [`docs/rapport.md`](docs/rapport.md) |
 | Rapport PDF | [`docs/rapport.pdf`](docs/rapport.pdf) |
+| Dépôt GitHub | `https://github.com/Steve-Landry-NONO/Spark-pipeline-project` |
 | Point d'entrée du pipeline | [`projet/pipeline_movielens.py`](projet/pipeline_movielens.py) |
 
 ---
 
 ## Présentation du projet
 
-Ce dépôt contient mon projet individuel réalisé dans le cadre du jour 4 de la formation Apache Spark.
+Ce dépôt contient mon projet réalisé dans le cadre la formation Apache Spark.
 
 L'objectif est de construire un pipeline data complet avec PySpark, depuis l'ingestion de fichiers CSV bruts jusqu'à la production de résultats analytiques exploitables. Le projet suit une logique en trois couches : **bronze**, **silver** et **gold**.
 
@@ -83,7 +84,7 @@ Le dépôt a été réorganisé afin de séparer clairement :
     └── student-facing/
 ```
 
-Les ressources du cours sont conservées dans `ressources_cours/` afin de garder le contexte pédagogique sans mélanger les fichiers fournis avec les fichiers spécifiques au projet individuel.
+Les ressources du cours sont conservées dans `ressources_cours/` afin de garder le contexte pédagogique sans mélanger les fichiers fournis avec les fichiers spécifiques au projet.
 
 ---
 
