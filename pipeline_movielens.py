@@ -8,6 +8,7 @@ Le pipeline suit une logique bronze, silver et gold. Cette version exécute :
 La pause finale permet de consulter la Spark UI avant l'arrêt de la session.
 """
 
+from src.exploration import comparer_fonction_native_et_udf
 from src.optimisation import mesurer_broadcast_join
 from src.ecriture import (
     ecrire_resultat_gold,
@@ -94,7 +95,10 @@ def main() -> None:
     
     print("\n--- Étape 6 : optimisation Spark mesurée ---")
     mesurer_broadcast_join(notes_silver, films_silver)
-    
+       
+    print("\n--- Étape 7 : exploration complémentaire ---")
+    comparer_fonction_native_et_udf(films_silver)
+
     input("\nSpark UI ouverte sur http://localhost:4040 - Appuyer sur Entrée pour terminer...")
     
     
