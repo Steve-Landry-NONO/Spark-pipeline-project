@@ -8,6 +8,7 @@ Le pipeline suit une logique bronze, silver et gold. Cette version exécute :
 La pause finale permet de consulter la Spark UI avant l'arrêt de la session.
 """
 
+from src.optimisation import mesurer_broadcast_join
 from src.ecriture import (
     ecrire_resultat_gold,
     ecrire_silver_films,
@@ -90,6 +91,9 @@ def main() -> None:
     ecrire_resultat_gold(films_mieux_notes, CHEMIN_GOLD_FILMS_MIEUX_NOTES)
     ecrire_resultat_gold(popularite_genres, CHEMIN_GOLD_POPULARITE_GENRES)
     ecrire_resultat_gold(top_films_par_genre, CHEMIN_GOLD_TOP_FILMS_PAR_GENRE)
+    
+    print("\n--- Étape 6 : optimisation Spark mesurée ---")
+    mesurer_broadcast_join(notes_silver, films_silver)
     
     input("\nSpark UI ouverte sur http://localhost:4040 - Appuyer sur Entrée pour terminer...")
     
