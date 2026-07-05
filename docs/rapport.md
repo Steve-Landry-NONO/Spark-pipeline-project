@@ -459,18 +459,6 @@ Le code est découpé en modules afin de rendre le projet lisible :
 | `src/optimisation.py` | Mesure du broadcast join |
 | `src/exploration.py` | Exploration complémentaire |
 
-L'historique Git a été construit progressivement avec des commits en français afin de rendre visible la démarche de travail.
-
-Exemples de commits :
-
-```text
-Ajouter l'ingestion bronze des fichiers MovieLens
-Nettoyer les données et écrire la couche silver en Parquet
-Corriger l'extraction robuste de l'année des films
-Ajouter les analyses métier gold avec agrégation jointure et window function
-Mesurer l'optimisation par broadcast join
-Comparer une fonction native Spark et une UDF Python
-```
 
 ---
 
@@ -484,7 +472,7 @@ Le projet présente plusieurs limites :
 - les fichiers `tags.csv` et `links.csv` ne sont pas exploités dans cette version ;
 - les résultats analytiques restent descriptifs et ne vont pas jusqu'à un modèle de recommandation.
 
-Ces limites sont assumées. J'ai privilégié un pipeline complet, stable et bien expliqué plutôt qu'un ajout trop ambitieux qui aurait fragilisé le rendu.
+Ces limites sont assumées. J'ai privilégié un pipeline complet, stable et bien expliqué plutôt qu'un ajout trop ambitieux.
 
 ---
 
