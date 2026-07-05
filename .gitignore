@@ -17,3 +17,13 @@ derby.log
 output/
 *.crc
 _SUCCESS
+
+.venv/
+__pycache__/
+*.pyc
+
+data/datasets/
+data/output/
+
+.DS_Store
+.ipynb_checkpoints/
