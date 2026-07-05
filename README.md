@@ -8,8 +8,8 @@
 
 | Élément | Détail |
 |---|---|
-| Réalisation | Steve Landry KOUOKAM NONO & Sean |
-| Coordination| Antoine LUCSKO |
+| Réalisation | Steve Landry KOUOKAM NONO |
+| Coordination| Antoine LUCSKO & Sean |
 | Jeu de données | MovieLens small |
 | Technologie | PySpark |
 | Mode d'exécution | Local |
