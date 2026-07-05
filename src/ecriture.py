@@ -38,4 +38,21 @@ def ecrire_silver_films(films_propres: DataFrame, chemin_sortie: str) -> None:
     )
 
     print(f"Couche silver des films écrite dans : {chemin_sortie}")
+    
+def ecrire_resultat_gold(resultat: DataFrame, chemin_sortie: str) -> None:
+    """Écrit un résultat analytique gold au format Parquet.
+
+    Les résultats gold sont de petite taille. L'utilisation de coalesce(1) est
+    donc acceptable ici pour faciliter la consultation des fichiers produits.
+    Cette pratique ne serait pas adaptée sur un gros DataFrame.
+    """
+    (
+        resultat
+        .coalesce(1)
+        .write
+        .mode("overwrite")
+        .parquet(chemin_sortie)
+    )
+
+    print(f"Résultat gold écrit dans : {chemin_sortie}")
 

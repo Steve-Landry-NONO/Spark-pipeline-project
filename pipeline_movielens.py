@@ -8,7 +8,11 @@ Le pipeline suit une logique bronze, silver et gold. Cette version exécute :
 La pause finale permet de consulter la Spark UI avant l'arrêt de la session.
 """
 
-from src.ecriture import ecrire_silver_films, ecrire_silver_notes
+from src.ecriture import (
+    ecrire_resultat_gold,
+    ecrire_silver_films,
+    ecrire_silver_notes,
+)
 from src.ingestion import (
     afficher_controle_ingestion,
     lire_films_bruts,
@@ -20,6 +24,12 @@ from src.nettoyage import (
     nettoyer_notes,
 )
 from src.session_spark import creer_session_spark
+from src.analyses import (
+    afficher_resultats_analyses,
+    analyser_films_les_mieux_notes,
+    analyser_popularite_par_genre,
+    analyser_top_films_par_genre,
+)
 
 
 CHEMIN_NOTES_BRUTES = "data/datasets/ml-latest-small/ratings.csv"
@@ -27,6 +37,10 @@ CHEMIN_FILMS_BRUTS = "data/datasets/ml-latest-small/movies.csv"
 
 CHEMIN_SILVER_NOTES = "data/output/silver/notes"
 CHEMIN_SILVER_FILMS = "data/output/silver/films"
+
+CHEMIN_GOLD_FILMS_MIEUX_NOTES = "data/output/gold/films_mieux_notes"
+CHEMIN_GOLD_POPULARITE_GENRES = "data/output/gold/popularite_genres"
+CHEMIN_GOLD_TOP_FILMS_PAR_GENRE = "data/output/gold/top_films_par_genre"
 
 
 def main() -> None:
@@ -57,8 +71,29 @@ def main() -> None:
     print("\n--- Étape 3 : écriture silver en Parquet ---")
     ecrire_silver_notes(notes_propres, CHEMIN_SILVER_NOTES)
     ecrire_silver_films(films_propres, CHEMIN_SILVER_FILMS)
+    
+    print("\n--- Étape 4 : analyses métier gold ---")
+    notes_silver = spark.read.parquet(CHEMIN_SILVER_NOTES)
+    films_silver = spark.read.parquet(CHEMIN_SILVER_FILMS)
 
+    films_mieux_notes = analyser_films_les_mieux_notes(notes_silver, films_silver)
+    popularite_genres = analyser_popularite_par_genre(notes_silver, films_silver)
+    top_films_par_genre = analyser_top_films_par_genre(notes_silver, films_silver)
+
+    afficher_resultats_analyses(
+        films_mieux_notes,
+        popularite_genres,
+        top_films_par_genre,
+    )
+
+    print("\n--- Étape 5 : écriture gold en Parquet ---")
+    ecrire_resultat_gold(films_mieux_notes, CHEMIN_GOLD_FILMS_MIEUX_NOTES)
+    ecrire_resultat_gold(popularite_genres, CHEMIN_GOLD_POPULARITE_GENRES)
+    ecrire_resultat_gold(top_films_par_genre, CHEMIN_GOLD_TOP_FILMS_PAR_GENRE)
+    
     input("\nSpark UI ouverte sur http://localhost:4040 - Appuyer sur Entrée pour terminer...")
+    
+    
 
     spark.stop()
 
