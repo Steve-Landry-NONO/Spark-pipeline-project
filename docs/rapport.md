@@ -449,16 +449,30 @@ Le code est découpé en modules afin de rendre le projet lisible :
 
 | Fichier | Rôle |
 |---|---|
-| `pipeline_movielens.py` | Point d'entrée du pipeline |
-| `src/session_spark.py` | Création de la SparkSession |
-| `src/schemas.py` | Schémas explicites |
-| `src/ingestion.py` | Lecture bronze |
-| `src/nettoyage.py` | Nettoyage silver |
-| `src/ecriture.py` | Écriture des couches |
-| `src/analyses.py` | Analyses métier |
-| `src/optimisation.py` | Mesure du broadcast join |
-| `src/exploration.py` | Exploration complémentaire |
+| `projet/pipeline_movielens.py` | Point d'entrée du pipeline |
+| `projet/src/session_spark.py` | Création de la SparkSession |
+| `projet/src/schemas.py` | Schémas explicites |
+| `projet/src/ingestion.py` | Lecture bronze |
+| `projet/src/nettoyage.py` | Nettoyage silver |
+| `projet/src/ecriture.py` | Écriture des couches |
+| `projet/src/analyses.py` | Analyses métier |
+| `projet/src/optimisation.py` | Mesure du broadcast join |
+| `projet/src/exploration.py` | Exploration complémentaire |
 
+
+Après une première version fonctionnelle, j'ai réorganisé le dépôt afin de distinguer clairement le projet individuel des ressources fournies par le cours. Les fichiers du projet sont regroupés dans `projet/`, tandis que les supports du cours sont conservés dans `ressources_cours/`.
+L'historique Git a été construit progressivement avec des commits en français afin de rendre visible la démarche de travail.
+
+Exemples de commits :
+
+```text
+Ajouter l'ingestion bronze des fichiers MovieLens
+Nettoyer les données et écrire la couche silver en Parquet
+Corriger l'extraction robuste de l'année des films
+Ajouter les analyses métier gold avec agrégation jointure et window function
+Mesurer l'optimisation par broadcast join
+Comparer une fonction native Spark et une UDF Python
+```
 
 ---
 
