@@ -9,7 +9,7 @@
 | Élément | Détail |
 |---|---|
 | Réalisation | Steve Landry KOUOKAM NONO |
-| Coordination| Antoine LUCSKO & Sean |
+| Coordination| Antoine LUCSKO & GENDERS Siôn |
 | Jeu de données | MovieLens small |
 | Technologie | PySpark |
 | Mode d'exécution | Local |
